@@ -23,4 +23,43 @@
       }
     }
   }
+
+  &__right {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .ui.icon.input > input {
+    padding-right: 0.25rem !important;
+  }
+  
+  .ui.input {
+    align-items: center;
+    margin-right: 1.5rem;
+
+    input {
+      background-color: transparent !important;
+      border: 0;
+      border-bottom: 2px solid $primary !important;
+      border-radius: 0;
+      color: $primary !important;
+      padding: 0.25rem !important;
+      width: 14rem;
+      font-size: 20px;
+      transition: width 0.7s;
+
+      &:focus {
+        width: 21rem;
+      }
+
+    }
+
+    i {
+      color: $primary;
+      opacity: 1 !important;
+      font-size: 25px;
+      right: -3rem !important;
+    }
+  }
 }

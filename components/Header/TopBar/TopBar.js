@@ -12,7 +12,7 @@ export default function TopBar() {
           </GridColumn>
 
           <GridColumn width={8} className="top-bar__right">
-            <h2>Buscador</h2>
+            <Search/>
           </GridColumn>
 
         </Grid>
@@ -29,4 +29,10 @@ function Logo(){
       </a>
     </Link>
   );
+}
+
+function Search(){
+  return(
+    <Input id="search-game" icon={{name: "search"}} placeholder="Buscar..."/>
+  )
 }
