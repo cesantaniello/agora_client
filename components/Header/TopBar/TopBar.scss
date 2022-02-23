@@ -1,1 +1,26 @@
-.top-bar{}
+.top-bar{
+  height: 6rem;
+  background-color: $background-dark;
+
+  .ui.grid{
+    margin: 0;
+    padding: 0;
+    .column{
+      padding: 0;
+    }
+  }
+
+  &__left {
+    display: flex !important;
+    align-items: center;
+
+    img {
+      height: 3rem;
+      transition: all 0.5s;
+
+      &:hover {
+        transform: translateX(-1rem);
+      }
+    }
+  }
+}
