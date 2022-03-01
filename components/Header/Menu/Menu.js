@@ -97,10 +97,12 @@ function MenuOptions(props){
             </Menu.Item>
           </>
         )
-        : (<Menu.Item onClick={onShowModal}>
+        : (
+        <Menu.Item onClick={onShowModal}>
             <Icon name="user outline"/>
             Mi cuenta
-          </Menu.Item>)
+          </Menu.Item>
+        )
       }
     </Menu>
   )
