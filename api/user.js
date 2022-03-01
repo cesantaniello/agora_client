@@ -38,7 +38,7 @@ export async function loginApi(formData) {
   }
 }
 
-export async function resetPassword(email){
+export async function resetPasswordApi(email) {
   try {
     const url = `${BASE_PATH}/auth/forgot-password`;
     const params = {
@@ -46,7 +46,7 @@ export async function resetPassword(email){
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({email}),
+      body: JSON.stringify({ email }),
     };
     const response = await fetch(url, params);
     const result = await response.json();
