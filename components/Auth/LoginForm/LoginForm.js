@@ -37,6 +37,7 @@ export default function LoginForm(props) {
       resetPasswordApi(formik.values.identifier);
     }
   };
+  //TODO: Revisa resetear contraseña
 
   return (
     <Form className="login-form" onSubmit={formik.handleSubmit}>
