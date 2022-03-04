@@ -7,6 +7,7 @@ import useAuth from '../hooks/useAuth';
 import ChangeNameForm from '../components/Account/ChangeNameForm';
 import ChangeEmailForm from '../components/Account/ChangeEmailForm';
 import ChangePasswordForm from '../components/Account/ChangePasswordForm';
+import BasicModal from '../components/Modal/BasicModal';
 
 export default function Account() {
   const [user, setUser] = useState(undefined);
@@ -50,15 +51,28 @@ function Configuration(props){
 }
 
 function Addresses(){
+  const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [formModal, setFormModal] = useState(null);
+
+  const openModal = (title) => {
+    setTitleModal(title);
+    setFormModal(<h1>Nueva dirección</h1>);
+    setShowModal(true);
+  }
+
   return (
     <div className="account__addresses">
       <div className="title">
         Direcciones 
-        <Icon name="plus" link />
+        <Icon name="plus" link onClick={() => openModal("Nueva dirección")}/>
       </div>
       <div className="data">
         <p>Lista de direcciones...</p>
       </div>
+      <BasicModal show={showModal} setShow={setShowModal} title={titleModal}>
+        <p>Formulario Add | Update</p>
+      </BasicModal>
     </div>
   )
 }
