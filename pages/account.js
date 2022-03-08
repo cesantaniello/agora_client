@@ -58,7 +58,7 @@ function Addresses(){
 
   const openModal = (title) => {
     setTitleModal(title);
-    setFormModal(<AddressForm />);
+    setFormModal(<AddressForm setShowModal={setShowModal}/>);
     setShowModal(true);
   }
 
