@@ -11,7 +11,8 @@ import BasicModal from '../components/Modal/BasicModal';
 import AddressForm from '../components/Account/AddressForm';
 import ListAddress from '../components/Account/ListAddress';
 
-export default function Account() {
+export default function Account(props) {
+  const {reloadAddresses, setReloadAddresses} = props;
   const [user, setUser] = useState(undefined);
   const {auth, logout, setReloadUser} = useAuth();
   const router = useRouter();
@@ -56,10 +57,11 @@ function Addresses(){
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
+  const [reloadAddresses, setReloadAddresses] = useState(false);
 
   const openModal = (title) => {
     setTitleModal(title);
-    setFormModal(<AddressForm setShowModal={setShowModal}/>);
+    setFormModal(<AddressForm setShowModal={setShowModal} setReloadAddresses={setReloadAddresses}/>);
     setShowModal(true);
   }
 
@@ -70,7 +72,7 @@ function Addresses(){
         <Icon name="plus" link onClick={() => openModal("Nueva dirección")}/>
       </div>
       <div className="data">
-        <ListAddress />
+        <ListAddress reloadAddresses={reloadAddresses} setReloadAddresses={setReloadAddresses}/>
       </div>
       <BasicModal show={showModal} setShow={setShowModal} title={titleModal}>
         {formModal}
