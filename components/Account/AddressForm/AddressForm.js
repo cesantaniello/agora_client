@@ -6,15 +6,16 @@ import useAuth from '../../../hooks/useAuth';
 import {createAddressApi} from '../../../api/address';
 
 export default function AddressForm(props) {
-  const {setShowModal, setReloadAddresses} = props;
+  const {setShowModal, setReloadAddresses, newAddress, address} = props;
   const [loading, setLoading] = useState(false);
   const {auth, logout} = useAuth();
   
   const formik = useFormik({
-    initialValues: initialValues(),
+    initialValues: initialValues(address),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: (formData) => {
-      createAddress(formData);
+      // createAddress(formData);
+      (newAddress) ? createAddress(formData) : updateAddress(formData);
     }
   });
 
@@ -36,6 +37,10 @@ export default function AddressForm(props) {
       setShowModal(false);
     }
 
+  }
+
+  const updateAddress = (formData) => {
+    console.log("Actualizando dirección");
   }
 
   return (
@@ -110,21 +115,23 @@ export default function AddressForm(props) {
         />        
       </Form.Group>
       <div className="actions">
-        <Button type="submit" className="submit" loading={loading}>Crear dirección</Button>
+        <Button type="submit" className="submit" loading={loading}>
+          {newAddress ? "Crear dirección" : "Actualizar dirección"}
+        </Button>
       </div>
     </Form>
   )
 }
 
-function initialValues() {
+function initialValues(address) {
   return {
-    title: "",
-    name: "",
-    address: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    phone: ""
+    title: address?.title || "",
+    name: address?.name || "",
+    address: address?.address || "",
+    city: address?.city || "",
+    state: address?.state || "",
+    postalCode: address?.postalCode || "",
+    phone: address?.phone || ""
   };
 }
 
