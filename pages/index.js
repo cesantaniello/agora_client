@@ -9,7 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     (async() => {
-      const response = await getLastGamesApi(50);
+      const response = await getLastGamesApi(20);
       if(size(response) > 0) setGames(response);
       else setGames([]);
     })();
