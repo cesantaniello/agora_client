@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Loader } from 'semantic-ui-react';
 import {useRouter} from 'next/router';
+import { size } from 'lodash';
 import BasicLayout from '../../layouts/BasicLayout';
 import { getGamesPlatformApi } from '../../api/game';
+import ListGames from '../../components/ListGames';
 
 const limitPerPage = 10;
 
@@ -11,14 +14,22 @@ export default function Platform() {
 
   useEffect(() => {
     (async() => {
-      const response = await getGamesPlatformApi(query.platform, limitPerPage, 0);
-      setGames(response);    
+      if (query.platform) {
+        const response = await getGamesPlatformApi(query.platform, limitPerPage, 0);
+        setGames(response);    
+      }
     })();
   }, [query]);
 
   return (
     <BasicLayout className="platform">
-      <h1>Estamos en la plataforma {query.platform} </h1>
+      {!games && <Loader active>Cargando juegos</Loader>}
+      {games && size(games) === 0 && (
+        <div>
+          <h3>No hay juegos para esta plataforma</h3>
+        </div>
+      )}
+      {size(games) > 0 && <ListGames games={games} />}
     </BasicLayout>
   )
 }
