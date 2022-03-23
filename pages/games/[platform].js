@@ -6,7 +6,7 @@ import BasicLayout from '../../layouts/BasicLayout';
 import { getGamesPlatformApi, getTotalGamesPlatformApi } from '../../api/game';
 import ListGames from '../../components/ListGames';
 
-const limitPerPage = 5;
+const limitPerPage = 10;
 
 export default function Platform() {
   const {query} = useRouter();
