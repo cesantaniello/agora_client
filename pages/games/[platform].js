@@ -53,3 +53,5 @@ export default function Platform() {
     </BasicLayout>
   )
 }
+
+//ToDo: Implementar paginación de juegos -> Video 102 - Revisar actualización de Strapi para poder implementar paginación de juegos
