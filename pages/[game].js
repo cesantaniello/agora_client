@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import BasicLayout from '../layouts/BasicLayout';
 import { getGameByUrlApi } from '../api/game';
+import HeaderGame from '../components/Game/HeaderGame';
 
 export default function Game() {
   const [game, setGame] = useState(null);
@@ -14,9 +15,12 @@ export default function Game() {
     })();
   }, [query]);
 
+  if(!game) return null;
+
   return (
-    <div>
-      <h1>Estamos en game: {query.game}</h1>
-    </div>
+    <BasicLayout className="game">
+      <HeaderGame game={game} />
+      <p>Tabs Game</p>
+    </BasicLayout>
   )
 }
