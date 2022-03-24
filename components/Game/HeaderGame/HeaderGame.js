@@ -13,8 +13,26 @@ export default function HeaderGame(props) {
         <Image src={poster.url} alt={title} fluid />
       </Grid.Column>
       <Grid.Column mobile={16} tablet={10} computer={11}>
-        <p>Info Game</p>
+        <Info game={game}/>
       </Grid.Column>      
     </Grid>
+  )
+}
+
+function Info(props){
+  const { game } = props;
+  const { title, summary } = game;
+
+  return (
+    <>
+      <div className='header-game__title'>
+        {title}
+        <Icon name='heart outline' link />
+      </div>
+      <div 
+        className='header-game__summary' 
+        dangerouslySetInnerHTML={{__html: summary}}
+      />
+    </>
   )
 }
