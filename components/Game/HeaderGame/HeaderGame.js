@@ -39,7 +39,7 @@ function Info(props){
           <p>Precio de venta al público: {price} €</p>
           <div className="header-game__buy-price-actions">
             <p className='discount'>-{(discount)}%</p>
-            <p> {(discount > 0) ? (price - Math.floor(price * discount) / 100).toFixed(2) : (price)} €</p>
+            <p>{(price - Math.floor(price * discount) / 100).toFixed(2)} €</p>
           </div>
         </div>
         <Button
