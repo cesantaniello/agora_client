@@ -27,7 +27,6 @@ function Info(props){
   const [isFavorite, setIsFavorite] = useState(false);
   const [reloadFavorite, setReloadFavorite] = useState(false);
   const { auth, logout } = useAuth();
-  console.log(isFavorite);
 
   useEffect(() => {
     (async() => {
