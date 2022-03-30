@@ -47,14 +47,14 @@ function Search(){
 
   return(
     <Input 
-    id="search-game" 
-    icon={{name: "search"}} 
-    placeholder="Buscar..."
-    value={router.query.query}
-    onChange={
-      (_,data) => 
-      setSearchStr(data.value)
-    }
+      id="search-game" 
+      icon={{name: "search"}} 
+      placeholder="Buscar..."
+      value={router.query.query}
+      onChange={
+        (_,data) => 
+        setSearchStr(data.value)
+      }
     />
   )
 }
