@@ -13,6 +13,17 @@
     .data {
       background-color: $background-light;
       box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+
+      &__not-found {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .list-games {
+        .ui.grid {
+          margin: 0;
+        }
+      }
     }
   }
 }
