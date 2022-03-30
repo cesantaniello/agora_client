@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Loader } from 'semantic-ui-react';
 import BasicLayout from '../layouts/BasicLayout';
+import { size } from 'lodash';
 import { useRouter } from 'next/router';
 import { searchGamesApi } from '../api/game';
-import { sampleSize, size } from 'lodash';
+import ListGames from '../components/ListGames';
 
 export default function search() {
   const [games, setGames] = useState(null);
@@ -26,7 +28,13 @@ export default function search() {
 
   return (
     <BasicLayout className="search">
-      <h1>Búsqueda...</h1>
+      {!games && <Loader active> Buscando juegos... </Loader>}
+      {games && size(games) === 0 && (
+        <div>
+          <h3>No se encontraron juegos</h3>
+        </div>
+      )}
+      {size(games) > 0 && <ListGames games={games} />}
     </BasicLayout>
   )
 }
