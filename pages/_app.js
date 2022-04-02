@@ -5,7 +5,7 @@ import {useRouter} from 'next/router';
 import AuthContext from '../context/AuthContext';
 import CartContext from '../context/CartContext';
 import { setToken, getToken, removeToken } from '../api/token';
-import { getProductsCart, addProductCart } from '../api/cart';
+import { getProductsCart, addProductCart, countProductsCart } from '../api/cart';
 import "../scss/global.scss";
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,15 +15,27 @@ import "slick-carousel/slick/slick-theme.css";
 export default function MyApp({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
   const [reloadUser, setReloadUser] = useState(false);
+  const [totalProductsCart, setTotalProductsCart] = useState(0);
+  const [reloadCart, setReloadCart] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const token = getToken();
-    (token)
-      ? setAuth({token, idUser: jwtDecode(token).id,})
-      : setAuth(null);
+    if (token){
+      setAuth({
+        token, 
+        idUser: jwtDecode(token).id,
+      })
+    } else {
+      setAuth(null);
+    }
     setReloadUser(false);
   }, [reloadUser]);
+
+  useEffect(() => {
+    setTotalProductsCart(countProductsCart());
+    setReloadCart(false);
+  }, [reloadCart, auth]);
 
   (auth === undefined) && (null);
 
@@ -45,9 +57,12 @@ export default function MyApp({ Component, pageProps }) {
 
   const addProduct = (product) => {
     const token = getToken();
-    (token) 
-      ? addProductCart(product) 
-      : toast.warning("Debes iniciar sesión para agregar productos al carrito");
+    if (token){
+      addProductCart(product);
+      setReloadCart(true);
+    } else {
+      toast.warning("Debes iniciar sesión para agregar productos al carrito");
+    }
   }
 
   const authData = useMemo(
@@ -62,13 +77,13 @@ export default function MyApp({ Component, pageProps }) {
 
   const cartData = useMemo(
     () => ({
-      productsCart: 0,
+      productsCart: totalProductsCart,
       addProductCart: (product) => addProduct(product),
       getProductsCart: getProductsCart,
       removeProductCart: () => null,
       removeAllProductsCart: () => null,
     }),
-    []
+    [totalProductsCart]
   );
 
   return (
