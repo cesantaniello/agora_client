@@ -5,6 +5,16 @@ import useCart from '../../../hooks/useCart';
 
 export default function SummaryCart(props) {
   const { products } = props;
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    let price = 0;
+    forEach(products, (product) => {
+      price += product.price;
+    });
+    setTotalPrice(price);
+  }, []);
+
   return (
     <div className='summary-cart'>
       <div className='title'>Resumen del carrito</div>
@@ -36,6 +46,11 @@ export default function SummaryCart(props) {
                 <Table.Cell>{product.price} €</Table.Cell>
               </Table.Row>
             ))}
+            <Table.Row className='summary-cart__resume'>
+              <Table.Cell className='clear'/>
+              <Table.Cell colSpan='2'>Total</Table.Cell>
+              <Table.Cell className='total-price'>{(totalPrice).toFixed(2)} €</Table.Cell>
+            </Table.Row>
           </Table.Body>
         </Table>
       </div>
