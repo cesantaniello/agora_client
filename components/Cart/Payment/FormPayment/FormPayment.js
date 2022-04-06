@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { size } from 'lodash';
 import useAuth from '../../../../hooks/useAuth';
 import useCart from '../../../../hooks/useCart';
+import { paymentCartApi } from '../../../../api/cart';
 
 
 export default function FormPayment(props) {
@@ -13,6 +14,7 @@ export default function FormPayment(props) {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const { auth, logout } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +28,19 @@ export default function FormPayment(props) {
     if(result.error){
       toast.error(result.error.message);
     } else {
-      console.log(result);
+      const response = await paymentCartApi(
+        result.token, 
+        products, 
+        auth.idUser,
+        address,
+        logout
+      );
+
+      if(size(response) > 0){
+        toast.success("Compra realizada con éxito");
+      }else{
+        toast.error("Error al realizar la compra");
+      }
     }
 
     setLoading(false);
