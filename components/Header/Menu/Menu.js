@@ -82,7 +82,7 @@ function MenuOptions(props){
       {user 
         ? (
           <>
-            <Link href="/profile">
+            <Link href="/orders">
               <Menu.Item as="a">
                 <Icon name="game"/>
                 Mis pedidos
