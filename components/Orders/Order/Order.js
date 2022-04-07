@@ -9,6 +9,7 @@ export default function Order(props) {
   const { order } = props;
   const { game, totalPayment, createdAt, addressShipping} = order;
   const { title, poster, url } = game;
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -34,12 +35,34 @@ export default function Order(props) {
               circular 
               link 
               onClick={
-                () => console.log("Ver información")
+                () => setShowModal(true)
               } 
             />
           </div>
         </div>
       </div>
+      <AddressModal 
+        showModal={showModal} 
+        setShowModal={setShowModal} 
+        addressShipping={addressShipping}
+        title={title}
+      />
     </>
+  )
+}
+
+function AddressModal(props){
+  const { showModal, setShowModal, addressShipping, title } = props;
+
+  return (
+    <BasicModal show={showModal} setShow={setShowModal} size="tiny" title={title}>
+      <h3>El pedido se ha enviado a la siguiente dirección: </h3>
+      <div>
+        <p>{addressShipping.name}</p>
+        <p>{addressShipping.address}</p>
+        <p>{addressShipping.address}, {addressShipping.city} {" "} {addressShipping.zipCode}</p>
+        <p>{addressShipping.phone}</p>
+      </div>
+    </BasicModal>
   )
 }
