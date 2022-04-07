@@ -14,11 +14,30 @@ export default function Order(props) {
     <>
       <div className="order">
         <div className="order__info">
-          <Link href={`/${url}`}>
-            <a>
-              <Image src={poster.url} alt={title}/>
-            </a>
-          </Link>
+          <div className="order__info-data">
+            <Link href={`/${url}`}>
+              <a>
+                <Image src={poster.url} alt={title}/>
+              </a>
+            </Link>
+            <div>
+              <h2>{title}</h2>
+              <p>{totalPayment} €</p>
+            </div>
+          </div>
+          <div className='order__other'>
+            <p className='order__other-date'>
+              {moment(createdAt).format("L")} - {moment(createdAt).format("LT")}
+            </p>
+            <Icon 
+              name='eye' 
+              circular 
+              link 
+              onClick={
+                () => console.log("Ver información")
+              } 
+            />
+          </div>
         </div>
       </div>
     </>
