@@ -45,7 +45,10 @@ function Game(props){
       <Link href={`/${game.url}`}>
         <a>
           <div className='list-games__game-poster'>
-            <Image src={game.poster.url} alt={game.title}/>
+            <p>{game.title}</p>
+            <Image 
+              src={game?.poster?.url} 
+              alt={game.title}/>
             <div className="list-games__game-poster-info">
               {game.discount ? (
                 <span className="discount">-{game.discount}%</span>
@@ -60,4 +63,5 @@ function Game(props){
       </Link>
     </Grid.Column>
   )
+  console.log(game.poster.url);
 }
