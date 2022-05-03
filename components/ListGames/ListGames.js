@@ -42,23 +42,22 @@ function Game(props){
   const { game } = props;
   return (
     <Grid.Column className='list-games__game'>
-      <Link href={`/${game?.url}`}>
+      <Link href={`/${game.url}`}>
         <a>
           <div className='list-games__game-poster'>
-            <p>{game?.title}</p>
             <Image 
-              src={game?.poster?.url} 
-              alt={game?.title}/>
+              src={game.poster.url} 
+              alt={game.title}/>
             <div className="list-games__game-poster-info">
               {game?.discount ? (
                 <span className="discount">-{game.discount}%</span>
               ) : (
                 <span />
               )}
-              <span className="price">{game?.price}€</span>
+              <span className="price">{game.price}€</span>
             </div>
           </div>
-          <h2>{game?.title}</h2>
+          <h2>{game.title}</h2>
         </a>
       </Link>
     </Grid.Column>
