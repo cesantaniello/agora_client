@@ -41,7 +41,7 @@ export default function FormPayment(props) {
       if(size(response) > 0){
         toast.success("Compra realizada con éxito");
         removeAllProductsCart();
-        router.push('/orders');
+        router.push("/");
       }else{
         toast.error("Error al realizar la compra");
       }
